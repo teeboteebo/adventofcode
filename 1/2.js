@@ -1,13 +1,4 @@
-const fetch = require('node-fetch')
-
-
 const result = async () => {
-  // const entries = await fetch('https://adventofcode.com/2020/day/1/input', { 
-  //   method: 'GET',
-  //   headers: { 
-  //     'cookie': 'session=53616c7465645f5f6b1b3cad62e4e3d3b66f758280bd787b7577dc32bd6893608838fbab869849d7352639171a033730' 
-  //   } 
-  // })
   let entries = [
     1779,
     1737,
@@ -217,7 +208,7 @@ const result = async () => {
   entries.forEach(entryA => {
     [...entries].forEach(entryB => {
       const twopairsum = entryA + entryB
-      const missingval = 2020 - twopairsum
+      const missingval = target - twopairsum
       const entryC = entries.find(entry => { return entry == missingval })
 
       if (entryC) {
