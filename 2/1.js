@@ -15,9 +15,7 @@ const solution = () => {
   const valid = formatted.filter(input => {
     const regex = new RegExp(`${input.ltr}`, 'g')
     const ltrOccurences = (input.pw.match(regex) || []).length
-    if (ltrOccurences >= input.min && ltrOccurences <= input.max) {
-      return true
-    } else return false   
+    return (ltrOccurences >= input.min && ltrOccurences <= input.max) ? true : false  
   })
   console.log('Answer:');
   console.log(valid.length);
