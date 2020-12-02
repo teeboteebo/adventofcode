@@ -2,12 +2,6 @@ const fetch = require('node-fetch')
 
 
 const result = async () => {
-  // const entries = await fetch('https://adventofcode.com/2020/day/1/input', { 
-  //   method: 'GET',
-  //   headers: { 
-  //     'cookie': 'session=53616c7465645f5f6b1b3cad62e4e3d3b66f758280bd787b7577dc32bd6893608838fbab869849d7352639171a033730' 
-  //   } 
-  // })
   const entries = [
     1779,
     1737,
