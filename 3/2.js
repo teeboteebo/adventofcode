@@ -14,5 +14,12 @@ const solution = (incr, down = 1) => {
   }
   return treecount
 }
+const answer = [
+  solution(1),
+  solution(3),
+  solution(5),
+  solution(7),
+  solution(1, 2)
+].reduce((prod, curr) => prod * curr)
 
-  console.log(solution(3))
+console.log(answer);
