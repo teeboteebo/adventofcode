@@ -43,11 +43,8 @@ const checkValid = (pp) => {
 
     }
   })
-  console.log('valid', valid);
-  console.log('-----');
   return valid
 }
-
 // true === input is okay
 const validInput = (input, type) => {
   switch (type) {
@@ -97,8 +94,6 @@ const validNumber = (val, min, max) => {
   val = Number(val)
   return val <= max && val >= min
 }
-
-
 console.log(solution())
 
 
