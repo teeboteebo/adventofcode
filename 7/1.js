@@ -49,4 +49,6 @@ const solution = () => {
   return shinies.length
 }
 
+let start = new Date().getTime()
 console.log(solution())
+console.log('Time elapsed:', (new Date().getTime() - start), 'ms');
