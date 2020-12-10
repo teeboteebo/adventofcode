@@ -7,7 +7,6 @@ const solution = () => {
   sorted.unshift(0)
   sorted.push(sorted[sorted.length - 1] + 3)
 
-  let totalcombinations = 0
   let multiplier = 1
   let i = 0
   while (i < sorted.length) {
@@ -37,7 +36,7 @@ const solution = () => {
 
   }
 
-  const answer = totalcombinations
+  const answer = multiplier
   return answer
 }
 
