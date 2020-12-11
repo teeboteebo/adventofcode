@@ -28,7 +28,8 @@ const sitDown = (prevValues) => {
           return findNextVisibleSeat(orgValues, seat)
         } else return seat
       })
-      // console.log(partTwo);
+      console.log(partTwo);
+      console.log(partTwo.filter(s => s.val === '#').length);
       if (seat === 'L') {
         if (partTwo.filter(s => s.val === '#').length === 0) {
           seat = '#'
@@ -51,7 +52,7 @@ const sitDown = (prevValues) => {
 }
 const findNextVisibleSeat = (values, seat, multiplier = 2) => {
   const {val, x, y} = seat
-  if (val === null) return seat
+  if (val === null || val !== '.') return seat
   const newSeat = { val: values[y * multiplier] && values[y * multiplier][x * multiplier] || null, x: x * multiplier, y: y * multiplier }
   if (newSeat.val === null) {
     return seat
