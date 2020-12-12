@@ -8,35 +8,32 @@ const sitDown = (prevValues) => {
   const orgValues = [...prevValues]
   const newValues = [...prevValues].map((line, lineIndex) => {
     return line.map((seat, seatIndex) => {
-      // []   []   []
-      // [] [seat] []
-      // []   []   []
-      const adjacentSeats = [
-        { val: orgValues[(lineIndex - 1)] && orgValues[(lineIndex - 1)][(seatIndex - 1)] || null, x: -1, y: -1 }, // top left
-        { val: orgValues[(lineIndex - 1)] && orgValues[(lineIndex - 1)][(seatIndex)] || null, x: 0, y: -1 }, // top
-        { val: orgValues[(lineIndex - 1)] && orgValues[(lineIndex - 1)][(seatIndex + 1)] || null, x: 1, y: -1 }, // top right
-        { val: orgValues[(lineIndex)][(seatIndex - 1)] || null, x: -1, y: 0 }, // left
-        { val: orgValues[(lineIndex)][(seatIndex + 1)] || null, x: 1, y: 0 }, // right
-        { val: orgValues[(lineIndex + 1)] && orgValues[(lineIndex + 1)][(seatIndex - 1)] || null, x: -1, y: 1 }, // bottom left
-        { val: orgValues[(lineIndex + 1)] && orgValues[(lineIndex + 1)][(seatIndex)] || null, x: 0, y: 1 }, // bottom
-        { val: orgValues[(lineIndex + 1)] && orgValues[(lineIndex + 1)][(seatIndex + 1)] || null, x: 1, y: 1 } // bottom right
+      const directions = [
+        [-1,-1],  // top left
+        [-1, 0],  // top 
+        [-1, 1],  // top right
+        [0, -1],  // left
+        [0, 1],   // right
+        [1, -1],  // bottom left
+        [1, 0],   // bottom
+        [1, 1]    // bottom right
       ]
-      // console.log(adjacentSeats);
-      const partTwo = adjacentSeats.map(seat => {
-        if (seat.val === '.') {
-          // console.log('no seat, looking for next');
-          return findNextVisibleSeat(orgValues, seat)
-        } else return seat
+      const adjSeats = directions.map(dir => {
+        let val = orgValues[lineIndex + dir[0]] && orgValues[lineIndex + dir[0]][seatIndex + dir[1]] || null
+        let i = 2
+        while(val === '.'){
+          val = orgValues[lineIndex + (dir[0] * i)] && orgValues[lineIndex + (dir[0] * i)][seatIndex + (dir[1] * i)] || null
+          i++
+        }
+        return val
       })
-      console.log(partTwo);
-      console.log(partTwo.filter(s => s.val === '#').length);
       if (seat === 'L') {
-        if (partTwo.filter(s => s.val === '#').length === 0) {
+        if (adjSeats.filter(s => s === '#').length === 0) {
           seat = '#'
           changesMade = true
         }
       } else if (seat === '#') {
-        if (partTwo.filter(s => s.val === '#').length >= 5) {
+        if (adjSeats.filter(s => s === '#').length >= 5) {
           seat = 'L'
           changesMade = true
         }
@@ -50,21 +47,9 @@ const sitDown = (prevValues) => {
     return newValues
   }
 }
-const findNextVisibleSeat = (values, seat, multiplier = 2) => {
-  const {val, x, y} = seat
-  if (val === null || val !== '.') return seat
-  const newSeat = { val: values[y * multiplier] && values[y * multiplier][x * multiplier] || null, x: x * multiplier, y: y * multiplier }
-  if (newSeat.val === null) {
-    return seat
-  } else if(newSeat.val === 'L' || newSeat.val === '#') {
-    // console.log('seat found');
-    return newSeat
-  } else {
-    findNextVisibleSeat(values, seat, multiplier++)
-  }
 
-    // console.log('RUNNING');
-}
-const seatsTaken = sitDown(values).flat().filter(seat => seat === '#').length
+let start = new Date().getTime()
+const seatsTaken = sitDown(values).reduce((prev, curr) => prev.concat(curr)).filter(seat => seat === '#').length
 console.log(seatsTaken);
 console.log('Total iterations:', amountOfSitDowns);
+console.log('Time elapsed:', (new Date().getTime() - start), 'ms');

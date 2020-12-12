@@ -1,5 +1,5 @@
 const fs = require('fs')
-const values = fs.readFileSync('./input.txt', 'utf-8').trim().split('\n').map(line => line.split(''))
+const values = fs.readFileSync('./sample.txt', 'utf-8').trim().split('\n').map(line => line.split(''))
 // values = AoA
 let amountOfSitDowns = 0
 const sitDown = (prevValues) => {
