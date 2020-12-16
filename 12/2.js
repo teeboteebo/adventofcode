@@ -1,4 +1,3 @@
-const { doesNotThrow } = require('assert')
 const fs = require('fs')
 const commands = fs.readFileSync('./input.txt', 'utf-8').trim().split('\n').map(command => {
   const type = command.match(/[A-Z]/g)[0]
