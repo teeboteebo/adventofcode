@@ -23,13 +23,15 @@ const busses = fs.readFileSync('./input.txt', 'utf-8').split('\n')[1].split(',')
     return array
   }).flat()
 // console.log(busses)
-let i = 37
+let i = 836024966345345 - 37
 let sequence = undefined
-while(!sequence){
+while(!sequence && i < 836024966345345 + 37 * 4){
+  console.log(i);
   const bussesMatch = busses.map((bus, busindex) => {
-    return busRunsOk(bus.bus, busindex + i, bus.allowed)
+    return {bus: bus.bus , runs: busRunsOk(bus.bus, busindex + i, bus.allowed)}
   });
-  if(bussesMatch.filter(bus => bus).length === busses.length) {
+  if (i === 836024966345345) console.log(bussesMatch)
+  if((bussesMatch.filter(bus => bus.runs)).length === busses.length) {
     
     sequence = i
   }
@@ -37,10 +39,6 @@ while(!sequence){
 }
 console.log('sequence', sequence);
 function busRunsOk(busNo, minute, expected) {
-  // console.log('minute:', i, busNo, 'runs on', minute,(minute % busNo === 0), 'okay:',(minute % busNo === 0) === expected);
-  if(minute === 0) {
-
-  }
   return (minute % busNo === 0) === expected
 }
 // const onlyBusses = [...busses].filter(bus => bus !== 'x')
