@@ -6,7 +6,7 @@ const values = fs
 
 const solution = () => {
   let state = values
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 256; i++) {
     // previous day
     const priorDay = state
 
@@ -26,7 +26,8 @@ const solution = () => {
       return fish - 1
     });
     // console.log(newDay);
-    console.log({ day: i + 1, state: newDay });
+    console.log(i);
+    // console.log({ day: i + 1, state: newDay });
     state = newDay
   }
   return state.length
