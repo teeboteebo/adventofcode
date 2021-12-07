@@ -6,9 +6,10 @@ const values = fs
 
 const solution = () => {
   let cheapest = Number.MAX_SAFE_INTEGER
+  const minPos = Math.min(...values)
   const maxPos = Math.max(...values)
 
-  for (let i = 1; i <= maxPos; i++) {
+  for (let i = minPos; i <= maxPos; i++) {
     const costToMove = values.reduce((prev, curr) => prev + Math.abs(curr - i), 0)
     cheapest = cheapest < costToMove ? cheapest : costToMove
   }
