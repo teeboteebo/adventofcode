@@ -4,34 +4,27 @@ const values = fs
   .split(',')
   .map(x => Number(x))
 
-const solution = () => {
-  let state = values
-  for (let i = 0; i < 256; i++) {
-    // previous day
-    const priorDay = state
+const school = new Array(9).fill(0);
 
-    // cleanup 0s from last round and keep track of how many
-    let amountToAdd = 0
-    const cleaned = priorDay.map(x => {
-      if (!x) { amountToAdd++ }
-      return x > 0 ? x : x < 0 ? 1 : 7
-    })
-    for (let i = 0; i < amountToAdd; i++) {
-      // console.log('adding an 8');
-      cleaned.push(9)
+values.forEach(f => {
+  school[f] += 1;
+});
+
+for (let day = 0; day < 256; day++) {
+  let fish;
+  for (let i = 8; i >= 0; i--) {
+    if (i === 0) {
+      school[6] += school[i];
+      school[8] = school[i];
+      school[i] = fish;
+    } else if (i === 8) {
+      fish = school[i];
+    } else {
+      let oldFish = school[i];
+      school[i] = fish;
+      fish = oldFish;
     }
-    // console.log({ cleaned, amountToAdd });
-
-    const newDay = cleaned.map(fish => {
-      return fish - 1
-    });
-    // console.log(newDay);
-    console.log(i);
-    // console.log({ day: i + 1, state: newDay });
-    state = newDay
   }
-  return state.length
 }
 
-// solution2()
-console.log(solution())
+console.log(school.reduce((p, c) => p + c));
