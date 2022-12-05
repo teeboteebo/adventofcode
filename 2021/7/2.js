@@ -4,8 +4,11 @@ const values = fs
   .split(',')
   .map(x => Number(x))
 
+  console.log(values.length);
+
 const solution = () => {
   let cheapest = Number.MAX_SAFE_INTEGER
+  let index
   const minPos = Math.min(...values)
   const maxPos = Math.max(...values)
 
@@ -16,8 +19,22 @@ const solution = () => {
       return prev + cost
     }, 0)
     cheapest = cheapest < costToMove ? cheapest : costToMove
+    index = cheapest < costToMove ? index : i
   }
+  console.log(index);
   return cheapest
 }
 
+
 console.log(solution())
+
+
+
+
+
+
+
+
+
+
+
